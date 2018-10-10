@@ -1,8 +1,9 @@
-#include<stdio.h>
+#include <stdio.h>
 #include "hotel.h"
 
-int menu(void){
-    int code,status;
+int menu(void)
+{
+    int code, status;
 
     printf("\n%s%s\n", STARS, STARS);
     printf("Enter the number of the desired hotel:\n");
@@ -11,30 +12,36 @@ int menu(void){
     printf("5) quit\n");
     printf("%s%s\n", STARS, STARS);
 
-    while((status=scanf("%d", &code))!=1||(code<1||code>5)){
-        if (status!=1){
-            scanf("%*s");  //跳过无效的字符输入
+    while ((status = scanf("%d", &code)) != 1 || (code < 1 || code > 5))
+    {
+        if (status != 1)
+        {
+            scanf("%*s"); //跳过无效的字符输入
         }
         printf("Enter the int in 1 to 5.\n");
     }
     return code;
 }
 
-int getnights(void){
+int getnights(void)
+{
     int nights;
     printf("how many nights you need:");
-    while(scanf("%d", &nights)!=1){
+    while (scanf("%d", &nights) != 1)
+    {
         scanf("%*s");
         printf("Enter the int,such as 2.\n");
     }
     return nights;
 }
 
-void showprice(double rate, int nights){
+void showprice(double rate, int nights)
+{
     int n;
-    double total=0.0;
-    for (n=0; n<nights;n++, rate*=DISCOUNT){
-        total+=rate;
+    double total = 0.0;
+    for (n = 0; n < nights; n++, rate *= DISCOUNT)
+    {
+        total += rate;
     }
     printf("total cost: %6.2f", total);
 }
