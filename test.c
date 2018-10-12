@@ -1,21 +1,19 @@
 #include <stdio.h>
+#define SIZE 4
 
-void print(int n)
+int main(int argc, char const *argv[])
 {
-    printf("%d\n", n);
-}
 
-void fun(int n, void (*show)(int))
-{
+    int a[SIZE];
+    int value1 = 44;
+    int value2 = 88;
     int i;
-    for (i = 0; i < n; i++)
-    {
-        show(i);
-    }
-}
 
-int main()
-{
-    fun(10, print);
+    printf("value1: %d, value2: %d\n", value1, value2);
+    for (i = -1; i <= 4; i++)
+        a[i] = 2 * i + 1;
+    for (i = -1; i < 8; i++)
+        printf("%2d  :  %d\n", i, a[i]);
+    printf("value1: %d, value2: %d\n", value1, value2);
     return 0;
 }
