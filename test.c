@@ -1,18 +1,40 @@
 #include <stdio.h>
-#define SIZE 4
+#define ROWS 3
+#define COLS 4
+int sum(int rows, int cols, int ar[rows][cols]);
 
 int main(void)
 {
-    int value1 = 44;
-    int a[SIZE];
-    int value2 = 88;
-    int i;
-
-    printf("value1: %d, value2: %d\n", value1, value2);
-    for (i = -2; i <= 4; i++)
-        a[i] = 2 * i + 1;
-    for (i = -1; i < 8; i++)
-        printf("%2d  :  %d\n", i, a[i]);
-    printf("value1: %d, value2: %d\n", value1, value2);
+    int i, j;
+    int ra = 3;
+    int cs = 10;
+    int junk[ROWS][COLS] = {
+        {2, 3, 4, 5},
+        {3, 5, 8, 9},
+        {5, 9, 7, 5}};
+    int var[ra][cs];
+    for (i = 0; i < ra; i++)
+    {
+        for (j = 0; j < cs; j++)
+        {
+            var[i][j] = i * j + j;
+        }
+    }
+    printf("sum of junk: %d\n", sum(ROWS, COLS, junk));
+    printf("sum of var: %d\n", sum(ra, cs, var));
     return 0;
+}
+
+int sum(int rows, int cols, int ar[rows][cols])
+{
+    int i, j;
+    int total=0;
+    for (i = 0; i < rows; i++)
+    {
+        for (j = 0; j < cols; j++)
+        {
+            total += ar[i][j];
+        }
+    }
+    return total;
 }
