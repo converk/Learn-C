@@ -255,11 +255,152 @@
 //     return count;
 // }
 
-#include<stdio.h>
 
-#define WORDS "dasdasd"
-int main(void){
-    char words[]=WORDS;
-    printf("%s\n",words);
-    return 0;
-}
+//一个test
+// #include<stdio.h>
+
+// #define WORDS "dasdasd"
+// int main(void){
+//     char words[]=WORDS;
+//     printf("%s\n",words);
+//     return 0;
+// }
+
+//判断一个字符串是否在另一个字符串里面
+
+// #include<stdio.h>
+// #include<string.h>
+// int OneInTwo(char *,char *);
+
+// int count = 0;
+
+// int main(void){
+//     char words_1[]="sdfh";
+//     char words_2[]="dfh";
+//     int find;
+//     find=OneInTwo(words_1,words_2);
+//     printf("%d\n",find);
+
+//     return 0;
+// }
+
+// int OneInTwo(char *words_1, char *words_2){
+//     char *word_2_begin=words_2;
+//     char *new_word_1;
+
+//     while(*words_1!=*words_2){
+//         words_1++;
+//         count++;
+//     }
+//     new_word_1=words_1+1;
+//     count++;
+//     while (*words_1 == *words_2 && *words_2 != '\0')
+//     {
+//         words_1++;
+//         words_2++;
+//     }
+//     if (*words_1=='\0'&&*words_2!='\0')
+//         return 0;
+//     if(*words_2=='\0')
+//         return count-1;
+//     return OneInTwo(new_word_1, word_2_begin);
+// }
+
+
+//向数组输入一个单词,舍弃之前所有的空白字符,并且单词内不包含空白字符,把下面的输入换成s_gets()
+// #include<stdio.h>
+// #include<ctype.h>
+// #define SIZE 5
+
+// int main(int argc, char const *argv[])
+// {
+//     char str;
+//     char words[SIZE];
+//     str=getchar();
+//     while(isblank(str))
+//         str = getchar();
+//     words[0]=str;
+//     fgets(words+1,SIZE-1,stdin);
+//     fputs(words,stdout);
+//     return 0;
+// }
+
+
+//将一个字符串用其反序代替
+// #include<stdio.h>
+// int main(){
+//     char words[8]="fsdfsdf";
+//     char *p1;
+//     char *p2;
+//     char temp;
+//     p1=words;
+//     p2=words+(sizeof(words)/sizeof(char))-2;
+//     puts(words);
+//     while(p2 > p1){
+//         temp=*p1;
+//         *p1=*p2;
+//         *p2=temp;
+//         p1++;
+//         p2--;
+//     }
+//     puts(words);
+//     return 0;
+// }
+
+
+//删除输入字符串里的空格
+// #include<stdio.h>
+// #include<string.h>
+
+// #define MAX 81
+
+// char *s_gets(char *words, int size);
+// void DeleteSpace(char *);
+
+// int main(int argc, char const *argv[])
+// {
+//     char words[MAX];
+//     fputs("please enter a strings: ",stdout);
+//     while(*s_gets(words,MAX)){
+//         DeleteSpace(words);
+//         puts(words);
+//         fputs("please enter a strings: ", stdout);
+//     }
+//     return 0;
+// }
+
+// char *s_gets(char *words, int size){
+//     char *rev_lev;
+//     int i;
+//     rev_lev=fgets(words, size, stdin);
+//     //printf("rev_lev==words:%d\n", rev_lev == words);
+//     if(rev_lev){
+//         i=0;
+//         while (rev_lev[i]!='\0'&&rev_lev[i]!='\n')
+//             i++;
+//         if (rev_lev[i] == '\n')
+//             rev_lev[i]='\0';
+//         else
+//             while(getchar()!='\n')
+//                 continue;
+//     }
+//     return rev_lev;
+// }
+
+// void DeleteSpace(char *words){
+//     char *FindSpace;
+//     char *SpaceNext;
+//     char *temp;
+//     FindSpace=strchr(words,' ');
+//     while(FindSpace){
+//         temp=FindSpace;
+//         SpaceNext=FindSpace+1;
+//         while(*SpaceNext!='\0'){
+//             *FindSpace=*SpaceNext;
+//             FindSpace=SpaceNext;
+//             SpaceNext++;
+//         }
+//         *(SpaceNext-1)='\0';
+//         FindSpace=strchr(temp,' ');
+//     }
+// }
