@@ -1,60 +1,13 @@
-#include <stdio.h>
-#include <string.h>
-
-#define MAX 81
-
-char *s_gets(char *words, int size);
-void DeleteSpace(char *);
-
+#include<stdio.h>
 int main(int argc, char const *argv[])
 {
-    char words[MAX]="dasdasd";
-    fputs("please enter a strings: ", stdout);
-    // while (*s_gets(words, MAX))
-    // {
-    DeleteSpace(words);
-    puts(words);
-    fputs("please enter a strings: ", stdout);
-    // }
+    int i,j,m;
+    char p;
+    char temp;
+    scanf("%d%c",&i,&p);
+    scanf("%d",&m);
+    //temp=getchar();
+    printf("%d,%d",i,m);
+    printf("test:%c",p);  //temp为\n,当所有的整形输入完毕之后,敲下回车键,会被temp读入
     return 0;
-}
-
-char *s_gets(char *words, int size)
-{
-    char *rev_lev;
-    int i;
-    rev_lev = fgets(words, size, stdin);
-    //printf("rev_lev==words:%d\n", rev_lev == words);
-    if (rev_lev)
-    {
-        i = 0;
-        while (rev_lev[i] != '\0' && rev_lev[i] != '\n')
-            i++;
-        if (rev_lev[i] == '\n')
-            rev_lev[i] = '\0';
-        else
-            while (getchar() != '\n')
-                continue;
-    }
-    return rev_lev;
-}
-
-void DeleteSpace(char *words)
-{
-    char *FindSpace;
-    char *SpaceNext;
-    char *temp;
-    FindSpace = strchr(words, ' ');
-    while (FindSpace)
-    {
-        temp = FindSpace;
-        SpaceNext = FindSpace + 1;
-        while (*SpaceNext != '\0')
-        {
-            *FindSpace = *SpaceNext;
-            FindSpace = SpaceNext;
-            SpaceNext++;
-        }
-        FindSpace = strchr(temp, ' ');
-    }
 }
