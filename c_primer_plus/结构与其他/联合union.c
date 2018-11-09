@@ -1,24 +1,24 @@
 //联合union
-#include<stdio.h>
+// #include<stdio.h>
 
-union hold{
-    int digit;
-    double bigft;
-    char letter;
-};
+// union hold{
+//     int digit;
+//     double bigft;
+//     char letter;
+// };
 
-int main(void){
-    union hold valA;
-    valA.letter='A';
-    union hold valB = {.letter='a'};
-    union hold valC = {.digit=88}; //注意要加大括号
-    union hold valD = {.bigft = 50}; //当要赋值的类型不是联合的第一个的时候,要使用初始化器
-    printf("%c \n",valB);
-    printf("%d \n",valC);
-    printf("%f \n",valD);
+// int main(void){
+//     union hold valA;
+//     valA.letter='A';
+//     union hold valB = {.letter='a'};
+//     union hold valC = {.digit=88}; //注意要加大括号
+//     union hold valD = {.bigft = 50}; //当要赋值的类型不是联合的第一个的时候,要使用初始化器
+//     printf("%c \n",valB);
+//     printf("%d \n",valC);
+//     printf("%f \n",valD);
 
-    return 0;
-}
+//     return 0;
+// }
 
 //联合的另外一种用法
 // struct owner{  //车没有租出去,拥有者的名字
