@@ -1,4 +1,4 @@
-//伸缩数组成员的结构,一般声明不会声明变量,而是会声明指针,然后用malloc分配空间mnjdjbnjhhjjhjkkk
+//伸缩数组成员的结构,一般声明不会声明变量,而是会声明指针,然后用malloc分配空间
 
 #include<stdio.h>
 #include<stdlib.h>
