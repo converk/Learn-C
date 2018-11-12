@@ -1,4 +1,4 @@
-//传递结构指针,无返回
+//传递结构指针,无返回ty
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
