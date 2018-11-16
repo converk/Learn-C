@@ -34,5 +34,7 @@
         "${workspaceRoot}/Include",
         "${workspaceRoot}/Code/APP/Code/Libs/Cjson/Include"
     ],
-    "cppcheck.force": true
+    "cppcheck.force": true,
+    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.dimInactiveRegions": false
 }
