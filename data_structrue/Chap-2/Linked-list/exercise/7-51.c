@@ -74,12 +74,12 @@ List MergeTwoList(List L1, List L2)
     P1 = L1->Next;
     P2 = L2->Next;
     P3 = L3;
-    while (P1!=NULL && P2!=NULL)
+    while (P1 != NULL && P2 != NULL)
     {
         if (P1->Element <= P2->Element)
         {
             Insert(P1->Element, L3, P3);
-            P1=P1->Next;
+            P1 = P1->Next;
         }
         else
         {

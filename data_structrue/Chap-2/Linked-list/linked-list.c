@@ -22,8 +22,8 @@ int main(void)
 
     //插入元素
     P = L;
-    for (int i = 0; i < 5; P = P->Next, i++);
-    Insert(InsertElement, L, P);
+    //for (int i = 0; i < 5; P = P->Next, i++);
+    Insert(InsertElement, L, L);
     PtrList(L);
 
     //删除元素
