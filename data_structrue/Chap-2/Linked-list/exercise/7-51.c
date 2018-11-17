@@ -123,10 +123,19 @@ void Insert(int x, List L, Position P)
 
 void PtrList(List L)
 {
+    if (L->Next==NULL){
+        printf("NULL\n");
+        return;
+    }
     Position P = L->Next;
     while (P)
     {
-        printf("%d ", P->Element);
+        if(P->Next==NULL){
+            printf("%d", P->Element);
+        }
+        else{
+            printf("%d ", P->Element);
+        }
         P = P->Next;
     }
     printf("\n");
