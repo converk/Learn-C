@@ -1,133 +1,131 @@
+//数组实现栈
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
 struct Node;
-typedef struct Node *PtrToNode;
-typedef PtrToNode List; //头节点
-typedef PtrToNode Position;
+typedef struct Node *Stack;
+typedef struct Node *Position;
+
+int IsEmpty(Stack S);              //判断是否为空
+int IsFull(Stack S);               //判断是否满栈
+Stack CreatStack(int MaxElements); //创建一个新栈
+void DisposeStack(Stack S);        //释放栈空间
+void MakeEmpty(Stack S);           //清空一个栈,保留头结点
+void Push(int x, Stack S);         //插入一个元素,只能插入在头部位置
+void Pop(Stack S);                 //删除第一个元素
+void PrtStack(Stack S);            //打印栈
+
+#define MinStackSize 5
 
 struct Node
 {
-    int Element;
-    Position Next;
+    int Capacity;   //最长栈的个数
+    int TopOfStack; //栈顶元素,为-1时为空栈
+    int *Array;
 };
-
-#define LEN 81
-
-List MakeEmpty();                    //创建空表
-List MergeTwoList(List L1, List L2); //合并表
-void Insert(int x, List L, Position P);
-void PtrList(List L);
 
 int main(void)
 {
-    List L1, L2, L3;
-    Position P;
-    L1 = MakeEmpty();
-    L2 = MakeEmpty();
-    int Element;
+    Stack S;
+    int flag = 0;
 
-    //初始化L1
-    P = L1;
-    scanf("%d", &Element);
-    //Element = 0;
-    while (Element != -1)
-    {
-        Insert(Element, L1, P);
-        P = P->Next;
-        scanf("%d", &Element);
-    }
+    //初始化创建栈
+    S = CreatStack(8);
 
-    //初始化L2
-    P = L2;
-    scanf("%d", &Element);
-    //Element = 0;
-    while (Element != -1)
-    {
-        Insert(Element, L2, P);
-        P = P->Next;
-        scanf("%d", &Element);
-    }
+    //判断是否为空
+    flag = IsEmpty(S);
+    printf("%d\n", flag);
 
-    L3 = MergeTwoList(L1, L2);
-    PtrList(L3);
+    //添加元素
+    for (int i = 0; i < 8; Push(i, S), i++)
+        ;
+    PrtStack(S);
+
+    //判断是否满
+    flag = IsFull(S);
+    printf("%d\n", flag);
+
+    //删除第一个元素
+    Pop(S);
+    PrtStack(S);
+
+    //释放栈空间
+    DisposeStack(S);
+    PrtStack(S);
 
     return 0;
 }
 
-List MakeEmpty()
+int IsEmpty(Stack S)
 {
-    Position Ltail, Lhead; //头结点和尾节点
-    Position Lnew;         //一个新节点
-    Lhead = malloc(sizeof(struct Node));
-    Ltail = Lhead;
-    Ltail->Next = NULL;
-    return Lhead;
+    return S->TopOfStack == -1;
 }
 
-List MergeTwoList(List L1, List L2)
+int IsFull(Stack S)
 {
-    List L3;
-    Position P1, P2, P3;
-    L3 = MakeEmpty();
-    P1 = L1->Next;
-    P2 = L2->Next;
-    P3 = L3;
-    while (P1!=NULL && P2!=NULL)
-    {
-        if (P1->Element <= P2->Element)
-        {
-            Insert(P1->Element, L3, P3);
-            P1=P1->Next;
-        }
-        else
-        {
-            Insert(P2->Element, L3, P3);
-            P2 = P2->Next;
-        }
-        P3 = P3->Next;
-    }
-    if (!P1)
-    {
-        while (P2)
-        {
-            Insert(P2->Element, L3, P3);
-            P2 = P2->Next;
-            P3 = P3->Next;
-        }
-    }
-    if (!P2)
-    {
-        while (P1)
-        {
-            Insert(P1->Element, L3, P3);
-            P1 = P1->Next;
-            P3 = P3->Next;
-        }
-    }
-
-    return L3;
+    return S->TopOfStack >= S->Capacity - 1;
 }
 
-void Insert(int x, List L, Position P)
+Stack CreatStack(int MaxElements)
 {
-    Position temp;
-    temp = malloc(sizeof(struct Node));
-    if (temp == NULL)
-        puts("There is no space!!!!");
-    temp->Element = x;
-    temp->Next = P->Next;
-    P->Next = temp;
+    Stack S;
+    if (MaxElements < MinStackSize)
+    {
+        puts("the stack is too small!!");
+        return NULL;
+    }
+    S->Array = malloc(sizeof(int) * MaxElements);
+    if (S->Array == NULL)
+        return NULL;
+    S->Capacity = MaxElements;
+    S->TopOfStack = -1;
+    return S;
 }
 
-void PtrList(List L)
+void DisposeStack(Stack S)
 {
-    Position P = L->Next;
-    while (P)
+    if (S)
     {
-        printf("%d ", P->Element);
-        P = P->Next;
+        free(S->Array); //先释放数组空间
+        free(S);        //再释放栈空间
     }
+}
+
+void MakeEmpty(Stack S)
+{
+    S->TopOfStack = -1;
+}
+
+void Push(int x, Stack S)
+{
+    if (!IsFull(S))
+    {
+        S->TopOfStack += 1;
+        S->Array[S->TopOfStack] = x;
+    }
+    else
+    {
+        puts("the stack is full");
+    }
+}
+
+void Pop(Stack S)
+{
+    if (!IsEmpty(S))
+    {
+        S->TopOfStack--;
+    }
+    else
+    {
+        puts("the stack is Empty");
+    }
+}
+
+void PrtStack(Stack S)
+{
+    int index = 0;
+    if (!IsEmpty(S))
+        while (index <= S->TopOfStack)
+            printf("%d ", S->Array[index++]);
     printf("\n");
 }
