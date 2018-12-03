@@ -61,6 +61,7 @@ Stack CreatStack(int MaxElements)
     if (S == NULL)
         return NULL;
     S->Array=malloc(sizeof(int)*MaxElements);
+    //初始化的时候就确定了大小
     if(S->Array==NULL)
         return NULL;
     S->Capacity=MaxElements;

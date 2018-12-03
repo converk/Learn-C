@@ -1,131 +1,102 @@
-//数组实现栈
 #include <stdio.h>
 #include <stdlib.h>
 
 struct Node;
-typedef struct Node *Stack;
+typedef struct Node *Queue;
 typedef struct Node *Position;
 
-int IsEmpty(Stack S);              //判断是否为空
-int IsFull(Stack S);               //判断是否满栈
-Stack CreatStack(int MaxElements); //创建一个新栈
-void DisposeStack(Stack S);        //释放栈空间
-void MakeEmpty(Stack S);           //清空一个栈,保留头结点
-void Push(int x, Stack S);         //插入一个元素,只能插入在头部位置
-void Pop(Stack S);                 //删除第一个元素
-void PrtStack(Stack S);            //打印栈
-
-#define MinStackSize 5
+int IsEmpty(Queue Q);
+Queue CreatQueue(void);
+void DisposeQueue(Queue Q);
+void MakeEmpty(Queue Q);
+void Enqueue(int x, Queue Q);
+void Dequeue(Queue Q);
+void PrtQueue(Queue Q);
 
 struct Node
 {
-    int Capacity;   //最长栈的个数
-    int TopOfStack; //栈顶元素,为-1时为空栈
-    int *Array;
+    int Element;
+    Queue Next;
 };
 
 int main(void)
 {
-    Stack S;
-    int flag = 0;
+    Queue Q;
+    int flag;
 
-    //初始化创建栈
-    S = CreatStack(8);
+    //创建一个栈
+    Q = CreatQueue();
 
     //判断是否为空
-    flag = IsEmpty(S);
+    flag = IsEmpty(Q);
     printf("%d\n", flag);
 
-    //添加元素
-    for (int i = 0; i < 8; Push(i, S), i++)
-        ;
-    PrtStack(S);
-
-    //判断是否满
-    flag = IsFull(S);
-    printf("%d\n", flag);
+    //插入几个元素
+    for (int i = 0; i <= 6; i++)
+        Enqueue(i, Q);
+    PrtQueue(Q);
 
     //删除第一个元素
-    Pop(S);
-    PrtStack(S);
-
-    //释放栈空间
-    DisposeStack(S);
-    PrtStack(S);
-
-    return 0;
+    Dequeue(Q);
+    PrtQueue(Q);
 }
 
-int IsEmpty(Stack S)
+int IsEmpty(Queue Q)
 {
-    return S->TopOfStack == -1;
+    return Q->Next == NULL;
 }
 
-int IsFull(Stack S)
+Queue CreatQueue(void)
 {
-    return S->TopOfStack >= S->Capacity - 1;
+    Queue Q;
+    Q = malloc(sizeof(struct Node));
+    Q->Next = NULL;
+    return Q;
 }
 
-Stack CreatStack(int MaxElements)
+void DisposeQueue(Queue Q)
 {
-    Stack S;
-    if (MaxElements < MinStackSize)
+    Position h1 = Q;
+    Position h2 = h1->Next;
+    if (!IsEmpty(Q))
     {
-        puts("the stack is too small!!");
-        return NULL;
+        while (h2)
+        {
+            h1 = h2;
+            h2 = h2->Next;
+            free(h1);
+        }
     }
-    S->Array = malloc(sizeof(int) * MaxElements);
-    if (S->Array == NULL)
-        return NULL;
-    S->Capacity = MaxElements;
-    S->TopOfStack = -1;
-    return S;
+    free(Q);
 }
 
-void DisposeStack(Stack S)
+void Enqueue(int x, Queue Q)
 {
-    if (S)
-    {
-        free(S->Array); //先释放数组空间
-        free(S);        //再释放栈空间
-    }
+    Position temp;
+    temp=malloc(sizeof(struct Node));
+    temp->Element = x;
+    temp->Next = Q->Next;
+    Q->Next = temp;
 }
 
-void MakeEmpty(Stack S)
+void Dequeue(Queue Q)
 {
-    S->TopOfStack = -1;
-}
-
-void Push(int x, Stack S)
-{
-    if (!IsFull(S))
+    Position tail = Q;
+    if (!IsEmpty(Q))
     {
-        S->TopOfStack += 1;
-        S->Array[S->TopOfStack] = x;
-    }
-    else
-    {
-        puts("the stack is full");
+        while (tail->Next->Next)
+            tail = tail->Next;
+        tail->Next = NULL;
     }
 }
 
-void Pop(Stack S)
+void PrtQueue(Queue Q)
 {
-    if (!IsEmpty(S))
+    Position P = Q->Next;
+    while (P)
     {
-        S->TopOfStack--;
+        printf("%d ", P->Element);
+        P = P->Next;
     }
-    else
-    {
-        puts("the stack is Empty");
-    }
-}
-
-void PrtStack(Stack S)
-{
-    int index = 0;
-    if (!IsEmpty(S))
-        while (index <= S->TopOfStack)
-            printf("%d ", S->Array[index++]);
     printf("\n");
 }
