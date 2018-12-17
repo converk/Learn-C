@@ -1,65 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-struct AVLNode;
-typedef struct AVLNode *Position;
-typedef struct AVLNode *AVLTree;
-
-//查找和之前没什么区别
-AVLTree MakeEmpty(AVLTree T);
-Position SingleRotateWhithLeft(Position K2);  //情景1
-Position SingleRotateWhithRight(Position K2); //情景4
-Position DoubleRotateWhithLeft(Position K3);  //情景2
-Position DoubleRotateWhithRight(Position K3); //情景3
-AVLTree Insert(int x, AVLTree T);
-AVLTree Delete(int x, AVLTree);
-void PtrTree(AVLTree T);
-
-struct AVLNode
-{
-    int Element;
-    AVLTree left;
-    AVLTree right;
-    int Heigth;
-};
-
-int main(int argc, char const *argv[])
-{
-    AVLTree T = malloc(sizeof(struct AVLNode));
-    T->left = T->right = NULL;
-    T->Heigth = 0;
-    T->Element = 3;
-
-    //插入元素
-    
-    T = Insert(2, T); //这里一定要用T=来接收返回值,不然T不会改变
-    T = Insert(1, T);
-    T = Insert(4, T);
-    T = Insert(5, T);
-    T = Insert(6, T);
-    T = Insert(7, T);
-    T = Insert(16, T);
-    T = Insert(15, T);
-    T = Insert(14, T);
-    T = Insert(13, T);
-    T = Insert(12, T);
-    T = Insert(11, T);
-    T = Insert(10, T);
-    T = Insert(8, T);
-    T = Insert(9, T);
-    fputs("begin:", stdout);
-    PtrTree(T);
-    printf("\n");
-
-    //删除一个元素
-    T = Delete(5, T);
-    fputs("Delete8:", stdout);
-    PtrTree(T);
-    printf("\n");
-
-    return 0;
-}
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include "AVL-Tree.h"
 
 AVLTree MakeEmpty(AVLTree T)
 {
@@ -87,13 +29,14 @@ AVLTree Insert(int x, AVLTree T)
     if (T == NULL)
     { //当初始化一个AVL树
         T = malloc(sizeof(struct AVLNode));
-        if(T==NULL)
+        if (T == NULL)
             printf("ERROR!!!");
-        else{
+        else
+        {
             T->left = T->right = NULL;
             T->Element = x;
             T->Heigth = 0;
-        } 
+        }
     }
     else if (x < T->Element)
     {
@@ -184,15 +127,16 @@ AVLTree Delete(int x, AVLTree T)
     else
     { //如果只有一个儿子或者没有儿子
         P = T;
-        if (T->left == NULL&&T->right)
+        if (T->left == NULL && T->right)
             T = T->right; //改变子树的指向,返回的时候T的指向已经改变了
-        else if (T->right == NULL&&T->left)
+        else if (T->right == NULL && T->left)
             T = T->left;
         else
-            T=NULL;
+            T = NULL;
         free(P); //释放原有树节点的空间
     }
-    if(T){
+    if (T)
+    {
         if (Heigth(T->left) - Heigth(T->right) == 2)
         {
             if (Heigth(T->left->left) > Heigth(T->left->right))
@@ -209,7 +153,7 @@ AVLTree Delete(int x, AVLTree T)
         }
         T->Heigth = Heigth(T->left) >= Heigth(T->right) ? Heigth(T->left) + 1 : Heigth(T->right) + 1;
     }
-    
+
     return T;
 }
 
@@ -217,7 +161,7 @@ void PtrTree(AVLTree T)
 {
     if (T->left)
         PtrTree(T->left);
+    printf("%d(%d) ", T->Element,T->Heigth);
     if (T->right)
         PtrTree(T->right);
-    printf("%d ", T->Element);
 }
