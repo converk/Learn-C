@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
     printf("\n");
 
     //删除一个元素
-    T=Delete(7,T);
+    T=Delete(13,T);
     fputs("Delete8:", stdout);
     PtrTree(T);
     printf("\n");

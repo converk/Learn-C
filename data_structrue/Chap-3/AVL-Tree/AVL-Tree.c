@@ -139,16 +139,16 @@ AVLTree Delete(int x, AVLTree T)
     {
         if (Heigth(T->left) - Heigth(T->right) == 2)
         {
-            if (Heigth(T->left->left) > Heigth(T->left->right))
-                T = SingleRotateWhithLeft(T);
-            else if (Heigth(T->left->right) > Heigth(T->left->left))
+            if (T->left->right)  //如果左儿子的右子树存在就要双旋转
                 T = DoubleRotateWhithLeft(T);
+            else
+                T = SingleRotateWhithLeft(T);
         }
         else if (Heigth(T->right) - Heigth(T->left) == 2)
         {
-            if (Heigth(T->right->left) > Heigth(T->right->right))
+            if (T->right->left) //如果右儿子的左子树存在就要双旋转
                 T = DoubleRotateWhithRight(T);
-            else if (Heigth(T->right->right) > Heigth(T->right->left))
+            else 
                 T = SingleRotateWhithRight(T);
         }
         T->Heigth = Heigth(T->left) >= Heigth(T->right) ? Heigth(T->left) + 1 : Heigth(T->right) + 1;
