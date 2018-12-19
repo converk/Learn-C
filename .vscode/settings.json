@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "time.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdlib.h": "c"
     },
     "clang.cflags": [
         "-std=c99",
