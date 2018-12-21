@@ -3,7 +3,8 @@
         "time.h": "c",
         "stdio.h": "c",
         "stdlib.h": "c",
-        "in.h": "c"
+        "in.h": "c",
+        "btree.h": "c"
     },
     "clang.cflags": [
         "-std=c99",
