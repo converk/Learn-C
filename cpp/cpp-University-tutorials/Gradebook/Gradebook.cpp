@@ -54,3 +54,28 @@ void Gradebook::deterclassaverage() const
     } else
         cout << "don't enter any grade" << endl;
 }
+
+void Gradebook::inputGrades()
+{
+    double firstgrade;
+    double secondgrade;
+    double thirdgrade;
+
+    cin >> firstgrade >> secondgrade >> thirdgrade;
+    maxGrade = maximum(firstgrade, secondgrade, thirdgrade);
+}
+
+void Gradebook::displayGradeReport() const
+{
+    cout << "the max of entered: " << maxGrade << endl;
+}
+
+int Gradebook::maximum(int x, int y, int z) const
+{
+    int max = x;
+    if (y > max)
+        max = y;
+    if (z > max)
+        max = z;
+    return max;
+}

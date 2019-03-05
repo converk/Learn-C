@@ -19,5 +19,9 @@ int main()
 
     mygradebook.displayMessage();
     mygradebook.deterclassaverage(); //打印平均成绩
+
+    cout << "please enter three grades" << endl;
+    mygradebook.inputGrades();
+    mygradebook.displayGradeReport();
     return 0;
 }
