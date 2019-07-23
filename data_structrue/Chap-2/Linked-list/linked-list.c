@@ -1,10 +1,9 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "List.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-struct Node
-{
+struct Node {
     int Element;
     Position Next;
 };
@@ -15,41 +14,38 @@ int main(void)
     Position P;
     int InsertElement = 10;
     int DeleteElement = 10;
-    int FindElement=6;
+    int FindElement = 6;
 
     //创建空表
     L = MakeEmpty();
 
     //插入元素
     P = L;
-    //for (int i = 0; i < 5; P = P->Next, i++);
-    Insert(InsertElement, L, L);
+    for (int i = 0; i < 5; i++)
+        Insert(i, L, P);
     PtrList(L);
-
-    //删除元素
-    Delete(DeleteElement, L);
-    PtrList(L);
-
-    //查找元素或前面那个元素
-    P = FindPrevious(FindElement,L);
-    printf("%d\n", P->Element);
-
-    //删除表;
-    DeleteList(L);
-    PtrList(L);
-
+    Position pre, now, next;
+    pre = L;
+    now = L;
+    next = L->Next;
+    while (next != NULL) {
+        now = next;
+        next = now->Next;
+        now->Next = pre;
+        pre = now;
+    }
+    //PtrList(pre);
     return 0;
 }
 
 List MakeEmpty()
 {
     Position Ltail, Lhead; //头结点和尾节点
-    Position Lnew;         //一个新节点
+    Position Lnew; //一个新节点
     Lhead = malloc(sizeof(struct Node));
     Ltail = Lhead;
     Ltail->Next = NULL;
-    for (int i = 0; i < LEN; i++)
-    {
+    for (int i = 0; i < LEN; i++) {
         Lnew = malloc(sizeof(struct Node));
         Lnew->Element = i;
         Lnew->Next = NULL;
@@ -82,8 +78,7 @@ void Delete(int x, List L)
 {
     Position P, temp;
     P = FindPrevious(x, L);
-    if (!IsLast(P, L))
-    { //这里要判断是否是最后一个元素
+    if (!IsLast(P, L)) { //这里要判断是否是最后一个元素
         temp = P->Next;
         P->Next = temp->Next;
         free(temp);
@@ -113,8 +108,7 @@ void Insert(int x, List L, Position P)
 void DeleteList(List L)
 {
     Position P;
-    while (L)
-    {
+    while (L) {
         P = L->Next; //先定义一个元素用来存储下一个元素的位置
         free(L);
         L = P;
@@ -134,8 +128,7 @@ Position First(List L)
 void PtrList(List L)
 {
     Position P = L->Next;
-    while (P)
-    {
+    while (P) {
         printf("%d ", P->Element);
         P = P->Next;
     }
